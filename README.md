@@ -5,6 +5,16 @@ files included.
 
 This repository is meant to be a base to build on top of for building an API.
 
+## Copy This App
+
+```bash
+git clone https://github.com/codingwithmanny/nodets-bootstrap myproject;
+cd myproject;
+rm -rf .git;
+git init -y;
+git remote add origin https://github.com/your/newrepo;
+```
+
 ## Requirements
 
 - NodeJS 12.18.1 or NVM
