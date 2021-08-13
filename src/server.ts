@@ -1,7 +1,7 @@
 // Imports
 // ========================================================
 import app from './index';
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
 
 // ENV VARS
 // ========================================================
@@ -18,3 +18,7 @@ app.listen(PORT, () =>
     `Listening on PORT ${PORT}\nEnvironment: ${NODE_ENV}\nVersion: ${VERSION}`,
   ),
 );
+
+// Exports
+// ========================================================
+export default app;

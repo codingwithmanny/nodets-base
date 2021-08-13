@@ -1,9 +1,13 @@
 // Imports
 // ========================================================
-import * as dotenv from 'dotenv';
-import express from 'express';
+import 'express-async-errors';
+import dotenv from 'dotenv';
+import express, { NextFunction, Request, Response } from 'express';
 import cors from 'express';
 import helmet from 'helmet';
+import Routes from './routes';
+import { buildErrorResponse } from './utils/helpers';
+import { BadRequest, Forbidden, NotFound } from './utils/errorHandlers';
 
 // ENV VARS
 // ========================================================
@@ -21,11 +25,40 @@ const app = express();
 app.use(cors());
 app.use(helmet());
 
-// Endpoints / Routess
+// Endpoints / Routes
 // ========================================================
+/**
+ *
+ */
 app.get('/', (_req, res) =>
   res.send({ version: VERSION, environment: NODE_ENV }),
 );
+
+/**
+ *
+ */
+app.get('/healthz', (_req, res) => res.send({ status: 'ok' }));
+
+/**
+ *
+ */
+app.use('/api', Routes);
+
+// Error Handler
+// ========================================================
+app.use((error: any, _req: Request, res: Response, next: NextFunction) => {
+  if (
+    error instanceof BadRequest ||
+    error instanceof Forbidden ||
+    error instanceof NotFound
+  ) {
+    return res
+      .status(error?.httpStatusCode ?? 400)
+      .json(buildErrorResponse(error?.message ?? 'Unknown error'));
+  }
+
+  next(error);
+});
 
 // Exprots
 // ========================================================
