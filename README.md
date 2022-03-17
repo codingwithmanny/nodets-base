@@ -11,13 +11,13 @@ This repository is meant to be a base to build on top of for building an API.
 git clone https://github.com/codingwithmanny/nodets-bootstrap myproject;
 cd myproject;
 rm -rf .git;
-git init -y;
+git init;
 git remote add origin https://github.com/your/newrepo;
 ```
 
 ## Requirements
 
-- NodeJS 12.18.1 or NVM
+- NodeJS 14.17.5 or NVM
 
 ## Local Setup
 
