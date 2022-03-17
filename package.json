@@ -9,6 +9,7 @@
     "build": "tsc",
     "dev": "nodemon src/server.ts",
     "start": "export NODE_ENV=production && tsc && node build/server.js",
+    "release": "standard-version",
     "test": "yarn test:lint && yarn test:coverage",
     "test:jest": "./node_modules/.bin/jest --watch",
     "test:coverage": "./node_modules/.bin/jest --coverage",
