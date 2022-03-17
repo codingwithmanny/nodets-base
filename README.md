@@ -1,5 +1,5 @@
 [![Version](https://img.shields.io/github/package-json/v/codingwithmanny/nodets-bootstrap?style=flat-square)](https://github.com/codingwithmanny/nodets-bootstrap/blob/master/package.json)
-[![Build](https://img.shields.io/github/workflow/status/codingwithmanny/nodets-bootstrap/Node.js%20CI?style=flat-square)](https://github.com/codingwithmanny/nodets-bootstrap/actions/runs/1996569712)
+[![Build](https://img.shields.io/github/workflow/status/codingwithmanny/nodets-bootstrap/Node.js%20CI?style=flat-square)](https://github.com/codingwithmanny/nodets-bootstrap/actions/workflows/node.js.yml)
 [![codecov](https://img.shields.io/codecov/c/github/codingwithmanny/nodets-bootstrap?style=flat-square&token=UMIMTHBI5L)](https://codecov.io/gh/codingwithmanny/nodets-bootstrap)
 
 # NodeTS Bootstrap
@@ -28,19 +28,19 @@ git remote add origin https://github.com/your/newrepo;
 
 While in project directory:
 
-##3 0 - (Optional) NVM Installation\*\*
+### 0 - (Optional) NVM Installation
 
 ```bash
 nvm install;
 ```
 
-### 1 - Install Depencies\*\*
+### 1 - Install Depencies
 
 ```bash
 yarn install; # npm install;
 ```
 
-### 2 - Server Start\*\*
+### 2 - Server Start
 
 `Development:`
 
