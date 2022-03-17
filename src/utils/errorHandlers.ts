@@ -8,10 +8,9 @@ export class BadRequest extends Error {
   public httpStatusCode: number;
 
   constructor(message?: string) {
-    const trueProto = new.target.prototype;
     super(message);
     this.httpStatusCode = 400;
-    this.__proto__ = trueProto;
+    this.name = 'BadRequest';
   }
 }
 
@@ -23,10 +22,9 @@ export class Forbidden extends Error {
   public httpStatusCode: number;
 
   constructor(message?: string) {
-    const trueProto = new.target.prototype;
     super(message);
     this.httpStatusCode = 403;
-    this.__proto__ = trueProto;
+    this.name = 'Forbidden';
   }
 }
 
@@ -38,9 +36,8 @@ export class NotFound extends Error {
   public httpStatusCode: number;
 
   constructor(message?: string) {
-    const trueProto = new.target.prototype;
     super(message);
     this.httpStatusCode = 404;
-    this.__proto__ = trueProto;
+    this.name = 'NotFound';
   }
 }

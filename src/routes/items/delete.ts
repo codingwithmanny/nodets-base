@@ -1,8 +1,9 @@
 // Imports
 // ========================================================
 import { Router, Request, Response } from 'express';
+import { NotFound } from '../../utils/errorHandlers';
 import { buildSuccessResponse } from '../../utils/helpers';
-import { LIST } from './queries';
+import { DELETE } from './queries';
 
 // Config
 // ========================================================
@@ -10,14 +11,16 @@ const router = Router();
 
 // Route
 // ========================================================
-const ListItems = async (_req: Request, res: Response) => {
-  const data = await LIST();
+const DeleteItem = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const data = await DELETE(id);
+
   return res.json(buildSuccessResponse(data));
 };
 
 // Middlewares
 // ========================================================
-router.get('/', ListItems);
+router.delete('/:id', DeleteItem);
 
 // Exports
 // ========================================================

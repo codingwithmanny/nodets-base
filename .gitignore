@@ -8,3 +8,5 @@ package-lock.json
 .eslintcache
 **/.DS_Store
 coverage
+data/*
+!data/db.json

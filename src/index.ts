@@ -24,6 +24,7 @@ const app = express();
 // ========================================================
 app.use(cors());
 app.use(helmet());
+app.use(express.json());
 
 // Endpoints / Routes
 // ========================================================
@@ -47,14 +48,12 @@ app.use('/api', Routes);
 // Error Handler
 // ========================================================
 app.use((error: any, _req: Request, res: Response, next: NextFunction) => {
-  if (
-    error instanceof BadRequest ||
-    error instanceof Forbidden ||
-    error instanceof NotFound
-  ) {
+  if (['NotFound', 'BadRequest', 'Forbidden'].includes(error?.name)) {
     return res
       .status(error?.httpStatusCode ?? 400)
-      .json(buildErrorResponse(error?.message ?? 'Unknown error'));
+      .json(
+        buildErrorResponse({ message: error?.message ?? 'Unknown error.' }),
+      );
   }
 
   next(error);

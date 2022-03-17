@@ -1,8 +1,10 @@
 // Imports
 // ========================================================
 import { Router, Request, Response } from 'express';
+import { body } from 'express-validator';
+import Validator from '../../middlewares/validator';
 import { buildSuccessResponse } from '../../utils/helpers';
-import { LIST } from './queries';
+import { UPDATE } from './queries';
 
 // Config
 // ========================================================
@@ -10,14 +12,15 @@ const router = Router();
 
 // Route
 // ========================================================
-const ListItems = async (_req: Request, res: Response) => {
-  const data = await LIST();
+const UpdateItem = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const data = await UPDATE(id, req.body);
   return res.json(buildSuccessResponse(data));
 };
 
 // Middlewares
 // ========================================================
-router.get('/', ListItems);
+router.put('/:id', body('name').optional().isString(), Validator, UpdateItem);
 
 // Exports
 // ========================================================

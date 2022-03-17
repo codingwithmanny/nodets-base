@@ -1,9 +1,8 @@
 // Imports
 // ========================================================
 import { Router, Request, Response } from 'express';
-import { NotFound } from '../../utils/errorHandlers';
 import { buildSuccessResponse } from '../../utils/helpers';
-import dictionary from '../../utils/dictionary.json';
+import { READ } from './queries';
 
 // Config
 // ========================================================
@@ -13,10 +12,9 @@ const router = Router();
 // ========================================================
 const ReadItem = async (req: Request, res: Response) => {
   const { id } = req.params;
+  const data = await READ(id);
 
-  throw new NotFound(dictionary.ITEMS.ERROR.NOT_FOUND);
-
-  return res.json(buildSuccessResponse('item found'));
+  return res.json(buildSuccessResponse(data));
 };
 
 // Middlewares

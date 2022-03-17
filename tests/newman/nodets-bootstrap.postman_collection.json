@@ -1,0 +1,806 @@
+{
+	"info": {
+		"_postman_id": "ca80f64e-2e5a-490e-9f63-1632ee15fa77",
+		"name": "nodets-bootstrap",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "items",
+			"item": [
+				{
+					"name": "list",
+					"item": [
+						{
+							"name": "/items",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * JSON Result",
+											" */",
+											"const jsonData = pm.response.json();",
+											"",
+											"/**",
+											" * ",
+											" */",
+											"const reUUID = new RegExp('[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}$', 'i');",
+											"",
+											"/**",
+											" * status",
+											" */",
+											"pm.test(\"status - 200\", () => {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"/**",
+											" * success",
+											" */",
+											"pm.test(\"body - success - true\", () => {",
+											"    pm.expect(jsonData.success).to.eql(true);",
+											"});",
+											"",
+											"/**",
+											" * body",
+											" */",
+											"pm.test(\"body - data - values\", () => {",
+											"    pm.expect(Array.isArray(jsonData.data)).to.eql(true);",
+											"    if (jsonData.data.length > 0) {",
+											"       pm.expect(Object.keys(jsonData.data?.[0]).length).to.eq(2); ",
+											"       pm.expect(typeof jsonData?.data?.[0].id).to.eq('string');",
+											"       pm.expect(jsonData?.data?.[0]?.id).match(reUUID).to.not.eq(null);",
+											"       pm.expect(typeof jsonData?.data?.[0]?.name).to.eq('string');",
+											"    }",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiUrl}}/items",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"items"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "create",
+					"item": [
+						{
+							"name": "/items - 422",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * JSON Result",
+											" */",
+											"const jsonData = pm.response.json();",
+											"",
+											"/**",
+											" * status",
+											" */",
+											"pm.test(\"status - 422\", () => {",
+											"    pm.response.to.have.status(422);",
+											"});",
+											"",
+											"/**",
+											" * success",
+											" */",
+											"pm.test(\"body - success - false\", () => {",
+											"    pm.expect(jsonData.success).to.eql(false);",
+											"});",
+											"",
+											"/**",
+											" * body",
+											" */",
+											"pm.test(\"body - errors - array/vaues\", () => {",
+											"    pm.expect(Array.isArray(jsonData.errors)).to.eql(true);",
+											"    pm.expect(jsonData.errors.length).to.eq(1);",
+											"    pm.expect(typeof jsonData.errors[0]?.msg).to.eq('string');",
+											"    pm.expect(jsonData.errors[0]?.msg).to.eq('Invalid value');",
+											"    pm.expect(typeof jsonData.errors[0]?.param).to.eq('string');",
+											"    pm.expect(jsonData.errors[0]?.param).to.eq('name');",
+											"    pm.expect(typeof jsonData.errors[0]?.location).to.eq('string');",
+											"    pm.expect(jsonData.errors[0]?.location).to.eq('body');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{apiUrl}}/items",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/items - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * JSON Result",
+											" */",
+											"const jsonData = pm.response.json();",
+											"",
+											"/**",
+											" * ",
+											" */",
+											"const reUUID = new RegExp('[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}$', 'i');",
+											"",
+											"/**",
+											" * status",
+											" */",
+											"pm.test(\"status - 200\", () => {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"/**",
+											" * success",
+											" */",
+											"pm.test(\"body - success - true\", () => {",
+											"    pm.expect(jsonData.success).to.eql(true);",
+											"});",
+											"",
+											"/**",
+											" * body",
+											" */",
+											"pm.test(\"body - data - values\", () => {",
+											"    pm.expect(!Array.isArray(jsonData.data)).to.eql(true);",
+											"    pm.expect(Object.keys(jsonData.data).length).to.eq(2);",
+											"    pm.expect(typeof jsonData?.data?.id).to.eq('string');",
+											"    pm.expect(jsonData?.data?.id).match(reUUID).to.not.eq(null);",
+											"    pm.expect(typeof jsonData?.data?.name).to.eq('string');",
+											"    pm.expect(jsonData?.data?.name).to.eq(pm.environment.get('tempItemName'));",
+											"",
+											"    if (Object.keys(jsonData.data).length === 2) {",
+											"        pm.environment.set('tempItem', JSON.stringify(jsonData.data));",
+											"    }",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"/**",
+											" * Generated string",
+											" */",
+											"const randomString = (len = 1) => new Array(len*2).fill(1000).map((x) => Math.ceil(x * Math.random()).toString(36).charAt(0)).filter(Boolean).sort(() => Math.random() - 0.5).map((x,i) => i % 2 === 0 ? x.toUpperCase() : x).join('').substr(0,len);",
+											"",
+											"/**",
+											" * ",
+											" */",
+											"pm.environment.set('tempItemName', `Item ${randomString(10)}`);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"{{tempItemName}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/items",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"items"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "read",
+					"item": [
+						{
+							"name": "/items/:id - 404",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"/**",
+											" * ",
+											" */",
+											"const entry = JSON.parse(pm.environment.get('tempItem'));",
+											"",
+											"/**",
+											" * ",
+											" */",
+											"pm.environment.set('tempItemId', `${entry.id}`);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * JSON Result",
+											" */",
+											"const jsonData = pm.response.json();",
+											"",
+											"/**",
+											" * status",
+											" */",
+											"pm.test(\"status - 404\", () => {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											"",
+											"/**",
+											" * success",
+											" */",
+											"pm.test(\"body - success - false\", () => {",
+											"    pm.expect(jsonData.success).to.eql(false);",
+											"});",
+											"",
+											"/**",
+											" * body",
+											" */",
+											"pm.test(\"body - errors - values\", () => {",
+											"    pm.expect(!Array.isArray(jsonData.errors)).to.eql(true);",
+											"    pm.expect(Object.keys(jsonData.errors).length).to.eq(1);",
+											"    pm.expect(typeof jsonData?.errors?.message).to.eq('string');",
+											"    pm.expect(jsonData?.errors?.message).to.eq('Item not found.')",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiUrl}}/items/{{tempItemId}}1",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"items",
+										"{{tempItemId}}1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/items/:id - 200",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"/**",
+											" * ",
+											" */",
+											"const entry = JSON.parse(pm.environment.get('tempItem'));",
+											"",
+											"/**",
+											" * ",
+											" */",
+											"pm.environment.set('tempItemId', `${entry.id}`);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * JSON Result",
+											" */",
+											"const jsonData = pm.response.json();",
+											"",
+											"/**",
+											" * ",
+											" */",
+											"const reUUID = new RegExp('[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}$', 'i');",
+											"",
+											"/**",
+											" * status",
+											" */",
+											"pm.test(\"status - 200\", () => {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"/**",
+											" * success",
+											" */",
+											"pm.test(\"body - success - true\", () => {",
+											"    pm.expect(jsonData.success).to.eql(true);",
+											"});",
+											"",
+											"/**",
+											" * body",
+											" */",
+											"pm.test(\"body - data - values\", () => {",
+											"    pm.expect(!Array.isArray(jsonData.data)).to.eql(true);",
+											"    pm.expect(Object.keys(jsonData.data).length).to.eq(2);",
+											"    pm.expect(typeof jsonData?.data?.id).to.eq('string');",
+											"    pm.expect(jsonData?.data?.id).match(reUUID).to.not.eq(null);",
+											"    pm.expect(jsonData?.data?.id).to.eq(pm.environment.get('tempItemId'));",
+											"    pm.expect(typeof jsonData?.data?.name).to.eq('string');",
+											"    pm.expect(jsonData?.data?.name).to.eq(pm.environment.get('tempItemName'));",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiUrl}}/items/{{tempItemId}}",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"items",
+										"{{tempItemId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "update",
+					"item": [
+						{
+							"name": "/items/:id - 404",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"/**",
+											" * ",
+											" */",
+											"const entry = JSON.parse(pm.environment.get('tempItem'));",
+											"",
+											"/**",
+											" * ",
+											" */",
+											"pm.environment.set('tempItemId', `${entry.id}`);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * JSON Result",
+											" */",
+											"const jsonData = pm.response.json();",
+											"",
+											"/**",
+											" * status",
+											" */",
+											"pm.test(\"status - 404\", () => {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											"",
+											"/**",
+											" * success",
+											" */",
+											"pm.test(\"body - success - false\", () => {",
+											"    pm.expect(jsonData.success).to.eql(false);",
+											"});",
+											"",
+											"/**",
+											" * body",
+											" */",
+											"pm.test(\"body - errors - values\", () => {",
+											"    pm.expect(!Array.isArray(jsonData.errors)).to.eql(true);",
+											"    pm.expect(Object.keys(jsonData.errors).length).to.eq(1);",
+											"    pm.expect(typeof jsonData?.errors?.message).to.eq('string');",
+											"    pm.expect(jsonData?.errors?.message).to.eq('Item not found.')",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{apiUrl}}/items/{{tempItemId}}1",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"items",
+										"{{tempItemId}}1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/items/:id - 200 - empty",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"/**",
+											" * ",
+											" */",
+											"const entry = JSON.parse(pm.environment.get('tempItem'));",
+											"",
+											"/**",
+											" * ",
+											" */",
+											"pm.environment.set('tempItemId', `${entry.id}`);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * JSON Result",
+											" */",
+											"const jsonData = pm.response.json();",
+											"",
+											"/**",
+											" * ",
+											" */",
+											"const reUUID = new RegExp('[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}$', 'i');",
+											"",
+											"/**",
+											" * status",
+											" */",
+											"pm.test(\"status - 200\", () => {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"/**",
+											" * success",
+											" */",
+											"pm.test(\"body - success - true\", () => {",
+											"    pm.expect(jsonData.success).to.eql(true);",
+											"});",
+											"",
+											"/**",
+											" * body",
+											" */",
+											"pm.test(\"body - data - values\", () => {",
+											"    pm.expect(!Array.isArray(jsonData.data)).to.eql(true);",
+											"    pm.expect(Object.keys(jsonData.data).length).to.eq(2);",
+											"    pm.expect(typeof jsonData?.data?.id).to.eq('string');",
+											"    pm.expect(jsonData?.data?.id).match(reUUID).to.not.eq(null);",
+											"    pm.expect(jsonData?.data?.id).to.eq(pm.environment.get('tempItemId'));",
+											"    pm.expect(typeof jsonData?.data?.name).to.eq('string');",
+											"    pm.expect(jsonData?.data?.name).to.eq(pm.environment.get('tempItemName'));",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{apiUrl}}/items/{{tempItemId}}",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"items",
+										"{{tempItemId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/items/:id - 200 - name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"/**",
+											" * ",
+											" */",
+											"const entry = JSON.parse(pm.environment.get('tempItem'));",
+											"",
+											"/**",
+											" * ",
+											" */",
+											"pm.environment.set('tempItemId', `${entry.id}`);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * JSON Result",
+											" */",
+											"const jsonData = pm.response.json();",
+											"",
+											"/**",
+											" * ",
+											" */",
+											"const reUUID = new RegExp('[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}$', 'i');",
+											"",
+											"/**",
+											" * status",
+											" */",
+											"pm.test(\"status - 200\", () => {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"/**",
+											" * success",
+											" */",
+											"pm.test(\"body - success - true\", () => {",
+											"    pm.expect(jsonData.success).to.eql(true);",
+											"});",
+											"",
+											"/**",
+											" * body",
+											" */",
+											"pm.test(\"body - data - values\", () => {",
+											"    pm.expect(!Array.isArray(jsonData.data)).to.eql(true);",
+											"    pm.expect(Object.keys(jsonData.data).length).to.eq(2);",
+											"    pm.expect(typeof jsonData?.data?.id).to.eq('string');",
+											"    pm.expect(jsonData?.data?.id).match(reUUID).to.not.eq(null);",
+											"    pm.expect(jsonData?.data?.id).to.eq(pm.environment.get('tempItemId'));",
+											"    pm.expect(typeof jsonData?.data?.name).to.eq('string');",
+											"    pm.expect(jsonData?.data?.name).to.eq(`${pm.environment.get('tempItemName')} new`);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"{{tempItemName}} new\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/items/{{tempItemId}}",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"items",
+										"{{tempItemId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "delete",
+					"item": [
+						{
+							"name": "/items/:id - 404",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"/**",
+											" * ",
+											" */",
+											"const entry = JSON.parse(pm.environment.get('tempItem'));",
+											"",
+											"/**",
+											" * ",
+											" */",
+											"pm.environment.set('tempItemId', `${entry.id}`);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * JSON Result",
+											" */",
+											"const jsonData = pm.response.json();",
+											"",
+											"/**",
+											" * status",
+											" */",
+											"pm.test(\"status - 404\", () => {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											"",
+											"/**",
+											" * success",
+											" */",
+											"pm.test(\"body - success - false\", () => {",
+											"    pm.expect(jsonData.success).to.eql(false);",
+											"});",
+											"",
+											"/**",
+											" * body",
+											" */",
+											"pm.test(\"body - errors - values\", () => {",
+											"    pm.expect(!Array.isArray(jsonData.errors)).to.eql(true);",
+											"    pm.expect(Object.keys(jsonData.errors).length).to.eq(1);",
+											"    pm.expect(typeof jsonData?.errors?.message).to.eq('string');",
+											"    pm.expect(jsonData?.errors?.message).to.eq('Item not found.')",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{apiUrl}}/items/{{tempItemId}}1",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"items",
+										"{{tempItemId}}1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/items/:id - 200",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"/**",
+											" * ",
+											" */",
+											"const entry = JSON.parse(pm.environment.get('tempItem'));",
+											"",
+											"/**",
+											" * ",
+											" */",
+											"pm.environment.set('tempItemId', `${entry.id}`);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * JSON Result",
+											" */",
+											"const jsonData = pm.response.json();",
+											"",
+											"/**",
+											" * ",
+											" */",
+											"const reUUID = new RegExp('[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}$', 'i');",
+											"",
+											"/**",
+											" * status",
+											" */",
+											"pm.test(\"status - 200\", () => {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"/**",
+											" * success",
+											" */",
+											"pm.test(\"body - success - true\", () => {",
+											"    pm.expect(jsonData.success).to.eql(true);",
+											"});",
+											"",
+											"/**",
+											" * body",
+											" */",
+											"pm.test(\"body - data - values\", () => {",
+											"    pm.expect(!Array.isArray(jsonData.data)).to.eql(true);",
+											"    pm.expect(Object.keys(jsonData.data).length).to.eq(2);",
+											"    pm.expect(typeof jsonData?.data?.id).to.eq('string');",
+											"    pm.expect(jsonData?.data?.id).match(reUUID).to.not.eq(null);",
+											"    pm.expect(jsonData?.data?.id).to.eq(pm.environment.get('tempItemId'));",
+											"    pm.expect(typeof jsonData?.data?.name).to.eq('string');",
+											"    pm.expect(jsonData?.data?.name).to.eq(`${pm.environment.get('tempItemName')} new`);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{apiUrl}}/items/{{tempItemId}}",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"items",
+										"{{tempItemId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
