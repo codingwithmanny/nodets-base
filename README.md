@@ -1,3 +1,7 @@
+[![Version](https://img.shields.io/github/package-json/v/codingwithmanny/nodets-bootstrap?style=flat-square)](https://github.com/codingwithmanny/nodets-bootstrap/blob/master/package.json)
+[![Build](https://img.shields.io/github/workflow/status/codingwithmanny/nodets-bootstrap/Node.js%20CI?style=flat-square)](https://github.com/codingwithmanny/nodets-bootstrap/actions/runs/1996569712)
+[![codecov](https://img.shields.io/codecov/c/github/codingwithmanny/nodets-bootstrap?style=flat-square&token=UMIMTHBI5L)](https://codecov.io/gh/codingwithmanny/nodets-bootstrap)
+
 # NodeTS Bootstrap
 
 This is a base NodeJS TypeScript App built with express and all configurations
@@ -17,25 +21,26 @@ git remote add origin https://github.com/your/newrepo;
 
 ## Requirements
 
-- NodeJS 14.17.5 or NVM
+- NodeJS 16.14.0 or NVM
+- Yarn
 
 ## Local Setup
 
 While in project directory:
 
-**0 - (Optional) NVM Installation**
+##3 0 - (Optional) NVM Installation\*\*
 
 ```bash
 nvm install;
 ```
 
-**1 - Install Depencies**
+### 1 - Install Depencies\*\*
 
 ```bash
 yarn install; # npm install;
 ```
 
-**2 - Server Start**
+### 2 - Server Start\*\*
 
 `Development:`
 
@@ -87,4 +92,10 @@ yarn test:coverage; # npm run test:coverage;
 
 ```bash
 yarn test:lint; # npm run test:lint
+```
+
+`Newman`
+
+```bash
+yarn test:newman; # npm run test:newman
 ```
