@@ -3,7 +3,7 @@
 import 'express-async-errors';
 import dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
-import cors from 'express';
+import cors from 'cors';
 import helmet from 'helmet';
 import Routes from './routes';
 import { buildErrorResponse } from './utils/helpers';
