@@ -12,7 +12,14 @@ import { buildErrorResponse } from './utils/helpers';
 // ========================================================
 dotenv.config();
 
+/**
+ *
+ */
 const NODE_ENV: string = process.env.NODE_ENV || 'development';
+
+/**
+ *
+ */
 const VERSION: string = process.env.VERSION || 'unknown';
 
 // Init
@@ -58,6 +65,6 @@ app.use((error: any, _req: Request, res: Response, next: NextFunction) => {
   next(error);
 });
 
-// Exprots
+// Exports
 // ========================================================
 export default app;
