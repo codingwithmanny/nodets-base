@@ -7,7 +7,6 @@ import cors from 'cors';
 import helmet from 'helmet';
 import Routes from './routes';
 import { buildErrorResponse } from './utils/helpers';
-import { BadRequest, Forbidden, NotFound } from './utils/errorHandlers';
 
 // ENV VARS
 // ========================================================
