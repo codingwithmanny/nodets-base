@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "dev": "nodemon src/server.ts",
+    "dev": "nodemon --files src/server.ts",
     "start": "export NODE_ENV=production && tsc && node build/server.js",
     "release": "standard-version",
     "test": "yarn test:lint && yarn test:coverage",
