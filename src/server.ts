@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 // ========================================================
 dotenv.config();
 
-const PORT: number = parseInt(process.env.PORT as string, 10);
+const PORT: number = parseInt((process.env.PORT || 5001) as string);
 const NODE_ENV: string = process.env.NODE_ENV || 'development';
 const VERSION: string = process.env.VERSION || 'unknown';
 

@@ -4,7 +4,6 @@
  * Bad Request
  */
 export class BadRequest extends Error {
-  public __proto__: Error;
   public httpStatusCode: number;
 
   constructor(message?: string) {
@@ -18,7 +17,6 @@ export class BadRequest extends Error {
  * Forbidden Request
  */
 export class Forbidden extends Error {
-  public __proto__: Error;
   public httpStatusCode: number;
 
   constructor(message?: string) {
@@ -32,7 +30,6 @@ export class Forbidden extends Error {
  * NotFound Request
  */
 export class NotFound extends Error {
-  public __proto__: Error;
   public httpStatusCode: number;
 
   constructor(message?: string) {

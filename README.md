@@ -21,37 +21,37 @@ git remote add origin https://github.com/your/newrepo;
 
 ## Requirements
 
-- NodeJS 16.14.0 or NVM
-- Yarn
+- NodeJS 18.12.1 or NVM
+- pnpm
 
 ## Local Setup
 
 While in project directory:
 
-### 0 - (Optional) NVM Installation
+### Step 0 - (Optional) NVM Installation
 
 ```bash
 nvm install;
 ```
 
-### 1 - Install Depencies
+### Step 1 - Install Depencies
 
 ```bash
 yarn install; # npm install;
 ```
 
-### 2 - Server Start
+### Step 2 - Server Start
 
 `Development:`
 
 ```bash
-yarn dev; # npm dev;
+pnpm dev; # npm dev;
 ```
 
 `Production:`
 
 ```bash
-yarn start; # npm start;
+pnpm start; # npm start;
 ```
 
 ## Production Commands
@@ -59,13 +59,13 @@ yarn start; # npm start;
 `Build`
 
 ```bash
-yarn build; # npm run build
+pnpm build; # npm run build
 ```
 
 `Build & Serve`
 
 ```bash
-yarn start; # npm start
+pnpm start; # npm start
 ```
 
 ## Tests
@@ -73,19 +73,19 @@ yarn start; # npm start
 `All Tests`
 
 ```bash
-yarn test; # npm run test;
+pnpm test; # npm run test;
 ```
 
 `Jest Watch`
 
 ```bash
-yarn test:jest; # npm run test:jest;
+pnpm test:jest; # npm run test:jest;
 ```
 
 `Jest Coverage`
 
 ```bash
-yarn test:coverage; # npm run test:coverage;
+pnpm test:coverage; # npm run test:coverage;
 ```
 
 `Eslint`
@@ -97,5 +97,5 @@ yarn test:lint; # npm run test:lint
 `Newman`
 
 ```bash
-yarn test:newman; # npm run test:newman
+pnpm test:newman; # npm run test:newman
 ```
