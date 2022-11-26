@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/codingwithmanny/nodets-base/compare/v2.0.0...v3.0.0) (2022-11-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 n
+* 🧨 n
+* 🧨 n
+
+### Bug Fixes
+
+* 🐛 Added --files on package.json ([354d251](https://github.com/codingwithmanny/nodets-base/commit/354d251a2b8e07b26f20922891376cd9ec13329b)), closes [#22](https://github.com/codingwithmanny/nodets-base/issues/22)
+* 🐛 fix typos ([1e909f5](https://github.com/codingwithmanny/nodets-base/commit/1e909f5bb7ea66be301a10d0794b2ea8a912db4a)), closes [#20](https://github.com/codingwithmanny/nodets-base/issues/20)
+* 🐛 Removed unused errors ([af23c22](https://github.com/codingwithmanny/nodets-base/commit/af23c22ee6a37d1c05cbf5204ec97ff016dc50fe)), closes [#18](https://github.com/codingwithmanny/nodets-base/issues/18)
+
 ## 2.0.0 (2022-03-17)
 
 
